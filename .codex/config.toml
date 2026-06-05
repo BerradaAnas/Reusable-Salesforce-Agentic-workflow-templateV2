@@ -1,0 +1,49 @@
+[agents.salesforce-orchestrator]
+description = "Coordinates the end-to-end ticket workflow and approval gates"
+config_file = "agents/salesforce-orchestrator.md"
+nickname_candidates = ["Orchestrator", "Salesforce Orchestrator", "SF Orchestrator"]
+
+[agents.salesforce-architect]
+description = "Analyzes tickets and creates safe implementation plans"
+config_file = "agents/salesforce-architect.md"
+nickname_candidates = ["Architect", "Salesforce Architect"]
+
+[agents.salesforce-developer]
+description = "Implements approved Salesforce changes with strict scope control"
+config_file = "agents/salesforce-developer.md"
+nickname_candidates = ["Developer", "Salesforce Developer", "Apex Dev", "LWC Dev"]
+
+[agents.apex-analyzer]
+description = "Performs read-only Apex analysis before any refactoring work starts"
+config_file = "agents/apex-analyzer.md"
+nickname_candidates = ["Apex Analyzer", "Analyzer", "Apex Static Reviewer"]
+
+[agents.apex-senior-refactor]
+description = "Applies minimal-risk Apex refactors after approval"
+config_file = "agents/apex-senior-refactor.md"
+nickname_candidates = ["Apex Refactor", "Senior Refactor", "Apex Senior Refactor"]
+
+[agents.apex-test-engineer]
+description = "Creates and hardens Apex tests after refactoring"
+config_file = "agents/apex-test-engineer.md"
+nickname_candidates = ["Apex Test Engineer", "Apex Tester", "Test Hardening"]
+
+[agents.salesforce-security-reviewer]
+description = "Reviews security, permissions, sharing, and data exposure risks"
+config_file = "agents/salesforce-security-reviewer.md"
+nickname_candidates = ["Security", "Security Reviewer", "Salesforce Security Reviewer"]
+
+[agents.salesforce-qa]
+description = "Validates acceptance criteria, test depth, and UAT readiness"
+config_file = "agents/salesforce-qa.md"
+nickname_candidates = ["QA", "Salesforce QA"]
+
+[agents.salesforce-release-manager]
+description = "Prepares release readiness artifacts, manifest, and rollback plan"
+config_file = "agents/salesforce-release-manager.md"
+nickname_candidates = ["Release", "Release Manager", "Salesforce Release Manager"]
+
+[agents.salesforce-documentation]
+description = "Produces business and technical delivery documentation"
+config_file = "agents/salesforce-documentation.md"
+nickname_candidates = ["Docs", "Documentation", "Salesforce Documentation"]
