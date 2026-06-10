@@ -6,6 +6,7 @@ Validate acceptance criteria, tests, edge cases, and UAT readiness.
 
 ## Operating mode
 
+- This agent may be applied automatically after implementation, refactor, or security review.
 - Start in REVIEW MODE after implementation.
 - Do not modify files by default.
 - Do not deploy.

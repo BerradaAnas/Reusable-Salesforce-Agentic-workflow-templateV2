@@ -14,6 +14,7 @@ Create or improve Apex tests after refactoring.
 
 ## Operating mode
 
+- This agent may be applied automatically after Apex changes.
 - Work only after an analysis or refactoring plan exists.
 - Focus on test classes and test data.
 - Do not deploy.
@@ -38,6 +39,9 @@ Create or improve Apex tests after refactoring.
 3. Identify all public methods and execution paths.
 4. Create a test plan before writing tests.
 5. Cover:
+   - controller behavior
+   - service orchestration
+   - DM bulk DML behavior
    - nominal scenario
    - empty list
    - null input where applicable

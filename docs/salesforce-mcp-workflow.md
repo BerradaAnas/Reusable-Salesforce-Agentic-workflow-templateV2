@@ -4,83 +4,73 @@
 
 Define a controlled Salesforce delivery workflow using Codex agents, reusable skills, and Salesforce DX MCP discovery.
 
-## Scope model
+## Core Model
 
-- Repository type: workflow/template package
-- Primary usage: copied into Salesforce DX projects
-- Default policy: production deployment forbidden unless explicitly approved
+- Orchestrator is the single front door.
+- Every prompt is work intake.
+- Specialist agents are internal workers.
+- Safe phases can continue automatically.
+- Unsafe phases stop at approval gates.
 
-## End-to-end flow
+## Workflow Diagram
 
-Ticket
--> Orchestrator
--> Architect
--> Human approval
--> Developer
--> Security Reviewer
--> QA
--> Release Manager
--> Documentation
--> Manual deployment approval
+```mermaid
+flowchart LR
+    A[User Request] --> B[Orchestrator]
+    B --> C[Classification]
+    C --> D[Specialist Analysis]
+    D --> E[Approval Gate]
+    E --> F[Implementation or Refactor]
+    F --> G[Tests]
+    G --> H[Security]
+    H --> I[QA]
+    I --> J[Release or Docs]
+```
 
-## Workflow variants
+## End-to-End Flow
 
-### Standard delivery workflow
+1. User submits one prompt.
+2. `salesforce-orchestrator` classifies the request.
+3. The orchestrator applies specialist behavior internally.
+4. Safe read-only phases continue automatically.
+5. Unsafe work stops until explicit approval.
+6. After approval, implementation/refactor continues.
+7. Tests, security, QA, and docs follow automatically where relevant.
 
-Ticket
--> Orchestrator
--> Architect
--> Human approval
--> Developer
--> Security Reviewer
--> QA
--> Release Manager
--> Documentation
--> Manual deployment approval
+## Safe Phases
 
-### Apex Refactoring Workflow
+- file reading
+- file search
+- metadata discovery
+- analysis
+- planning
+- report creation
+- read-only security review
+- read-only QA review
+- documentation drafts
 
-Ticket
--> Orchestrator
--> apex-analyzer
--> Human approval
--> apex-senior-refactor
--> apex-test-engineer
--> Security Reviewer
--> QA
--> Release Manager if needed
--> Documentation
--> Manual deployment approval
+## Approval Gates
 
-## Phase breakdown
+Unsafe work requires approval:
 
-1. Ticket intake and quality check
-2. Complexity classification
-3. Metadata discovery (relevant only)
-4. Solution design and manifest draft
-5. Human plan approval
-6. ACT MODE implementation
-7. Security review
-8. QA validation
-9. Release readiness preparation
-10. Documentation completion
-11. Manual deployment approval
+- code edits
+- metadata creation
+- deployment
+- destructive changes
+- public contract changes
+- new architecture class creation
+- sharing/security behavior changes
+- transaction behavior changes
 
-## Approval gates
+## Workflow Variants
 
-- Gate 1: Plan approved
-- Gate 2: ACT MODE scope approved
-- Gate 2A: Analyzer complete before Apex refactor edits
-- Gate 3: Security sign-off when required
-- Gate 4: QA sign-off
-- Gate 5: Release readiness approved
-- Gate 6: Deployment approval
-
-## No-go triggers
-
-- Acceptance criteria missing
-- Metadata names unverified
-- Security impact unknown
-- Deployment target unclear
-- Scope changed without approval
-- Apex refactor requested without analyzer report
+- General Question / Explanation
+- New Salesforce Feature
+- Bug Fix
+- Apex Refactoring
+- Apex Layered Refactoring / DML Separation
+- Performance Investigation
+- Security Review
+- QA Validation
+- Release Preparation
+- Documentation Only

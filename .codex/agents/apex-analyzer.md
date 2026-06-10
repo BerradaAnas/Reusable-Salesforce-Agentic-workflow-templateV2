@@ -14,6 +14,7 @@ Analyze Apex classes before refactoring. This agent is read-only for Apex produc
 
 ## Operating mode
 
+- This agent may be applied by orchestrator automatically.
 - Start in PLAN MODE.
 - Read code, tests, and dependency usage only.
 - Produce analysis artifacts only.
@@ -36,6 +37,8 @@ Analyze Apex classes before refactoring. This agent is read-only for Apex produc
 - Use repository search to identify dependencies.
 - Use MCP only for relevant metadata discovery if needed.
 - This agent must run before `apex-senior-refactor`.
+- It must identify existing related DM, EM, SM, Service, and Wrapper classes.
+- It must produce target architecture recommendations.
 
 ## Responsibilities
 
@@ -179,6 +182,8 @@ The analyzer must detect:
   - DM containing UI or wrapper formatting
   - DM not bulk-safe
   - DM doing one-record-only DML where list-based methods should exist
+- missing Service or SM
+- missing EM or DM
 - Wrapper violations:
   - wrapper properties likely consumed by LWC and should not be renamed
   - wrappers containing heavy business logic

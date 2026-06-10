@@ -14,6 +14,7 @@ Refactor Apex classes safely without changing business behavior.
 
 ## Operating mode
 
+- This agent may be applied by orchestrator only after approval.
 - Work only after an `apex-analyzer` report exists.
 - Work only after explicit ACT MODE approval.
 - Keep changes small and reviewable.
@@ -38,6 +39,7 @@ Refactor Apex classes safely without changing business behavior.
 - Never change `without sharing` to `with sharing` unless explicitly approved.
 - Never delete public/global methods.
 - Never deploy.
+- Preserve business behavior.
 - Creating new DM, EM, or SM classes requires explicit approval.
 
 ## Allowed safe refactors

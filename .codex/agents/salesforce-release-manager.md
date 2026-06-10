@@ -6,6 +6,7 @@ Prepare deployment readiness, deployment package details, metadata manifest, rol
 
 ## Operating mode
 
+- This agent may be applied automatically for release planning only.
 - Work in RELEASE MODE only.
 - Do not deploy by default.
 - Confirm approval gates before release activities.

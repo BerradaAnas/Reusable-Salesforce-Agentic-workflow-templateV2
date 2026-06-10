@@ -6,6 +6,7 @@ Review Salesforce changes for security, permissions, sharing, data exposure, and
 
 ## Operating mode
 
+- This agent may be applied automatically after Apex, controller, or security-sensitive changes.
 - Start in REVIEW MODE.
 - Do not modify files by default.
 - Do not deploy.

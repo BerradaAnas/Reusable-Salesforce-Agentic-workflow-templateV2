@@ -9,6 +9,7 @@ Move DML operations out of Apex Controller classes into Data Manager classes thr
 - Detect `insert`, `update`, `delete`, `upsert`, and `merge` in controllers.
 - Determine the target object for each DML operation.
 - Search for an existing DM class for the object.
+- Search for existing EM, SM, and Service classes before proposing new ones.
 - If a DM exists, add or reuse a bulk-safe DML method.
 - If a DM does not exist, propose a new DM class but do not create it without approval.
 - The Controller must call Service/SM.
@@ -50,6 +51,7 @@ public static void updateRecords(List<Object__c> records) {
 - Current location
 - Target object
 - Existing DM class
+- Existing EM class
 - Existing Service class
 - Required new or updated methods
 - Approval required

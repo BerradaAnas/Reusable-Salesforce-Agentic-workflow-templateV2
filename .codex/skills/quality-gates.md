@@ -4,6 +4,95 @@
 
 Evaluate whether delivery can safely move to the next phase.
 
+## Orchestrated Workflow Gates
+
+Safe phases:
+
+- Request classification
+- File reading
+- File search
+- Metadata discovery
+- Analysis
+- Planning
+- Report creation
+- Read-only security review
+- Read-only QA review
+- Documentation draft
+
+Unsafe phases:
+
+- Code edit
+- Metadata creation
+- Metadata deployment
+- Data mutation
+- Destructive change
+- Public contract change
+- New architecture class creation
+- Sharing/security behavior change
+- Transaction behavior change
+
+### Gate 1 - Intake Classified
+
+Pass criteria:
+
+- Request type identified
+- Risk level identified
+- Required workflow selected
+
+### Gate 2 - Analysis Complete
+
+Pass criteria:
+
+- Analysis or plan produced
+- Impact and risks documented
+- Dependencies checked where relevant
+
+### Gate 3 - Approval Received
+
+Pass criteria:
+
+- Correct approval phrase received
+- Approved scope documented
+
+### Gate 4 - Implementation Complete
+
+Pass criteria:
+
+- Files changed only within scope
+- Changes summarized
+- No deployment performed unless approved
+
+### Gate 5 - Tests Complete
+
+Pass criteria:
+
+- Tests added or updated or gaps documented
+- Relevant commands listed
+
+### Gate 6 - Security Reviewed
+
+Pass criteria:
+
+- Security risks checked
+- Findings documented
+- No blocking issues unresolved
+
+### Gate 7 - QA Complete
+
+Pass criteria:
+
+- Acceptance criteria validated
+- Behavior preserved for refactors
+- No unapproved scope expansion
+
+### Gate 8 - Release Ready
+
+Pass criteria:
+
+- Manifest ready
+- Rollback ready
+- Deployment approval status clear
+
 ## Gates
 
 ### Before planning complete

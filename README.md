@@ -1,127 +1,133 @@
 # Reusable Salesforce Codex MCP Workflow Template
 
-## What this repository is
+## What This Is 📦
 
-This repository is a reusable workflow/template package for Salesforce delivery with Codex and Salesforce DX MCP.
+This repository is a reusable workflow/template package for Salesforce delivery with Codex.
 
-It provides:
+Use it to add a structured agent workflow to a Salesforce DX project.
 
-- Agent role definitions for structured collaboration.
-- Reusable skills for analysis, planning, implementation, security, QA, release, and documentation.
-- Documentation templates and quality gates.
-- Installation scaffolding to copy this package into Salesforce DX projects.
+It gives you:
 
-## What this repository is not
+- a single front door: `salesforce-orchestrator`
+- reusable specialist agents
+- reusable skills
+- approval gates
+- docs, checklists, and install scaffolding
 
-- Not a Salesforce managed package.
-- Not a deployable Salesforce metadata package.
-- Not a CI/CD pipeline.
-- Not an automated production deployment tool.
+## What This Is Not 🚫
 
-This repository should be copied into Salesforce DX projects and customized with your project values.
+This repository is not:
 
-## V2 architecture overview
+- a Salesforce metadata package
+- a deployment tool
+- a CI/CD pipeline
+- a production automation framework
+
+## Single Entry Point Orchestration 🎯
+
+The user talks to `salesforce-orchestrator`.
+
+The orchestrator classifies the request and coordinates specialist agents internally.
+
+The user does not need to manually call:
+
+- `apex-analyzer`
+- `salesforce-developer`
+- `apex-test-engineer`
+- `salesforce-security-reviewer`
+- `salesforce-qa`
+- `salesforce-release-manager`
+- `salesforce-documentation`
+
+## Every Prompt As Work Intake 🧭
+
+Every prompt is treated as potential work intake.
+
+The orchestrator decides whether the request is:
+
+- a question
+- a feature
+- a bug
+- a refactor
+- a performance investigation
+- a security review
+- a QA task
+- a release task
+- a documentation task
+
+## Prompt-Based Orchestration Vs Runtime Multi-Agent System 🧠
+
+This template provides prompt-based orchestration through Codex and project instructions.
+
+It can apply or spawn specialist behavior where supported by Codex.
+
+It is not a separate multi-process runtime.
+
+A future version can add a runner script or MCP-based orchestrator.
+
+## Apex Layered Refactoring 🏗️
+
+The workflow supports separating DML and complex SOQL from controllers into Service/SM, EM, and DM layers.
+
+Target architecture:
 
 ```text
-.codex/
-  config.toml.example
-  agents/
-    salesforce-orchestrator.md
-    salesforce-architect.md
-    salesforce-developer.md
-    apex-analyzer.md
-    apex-senior-refactor.md
-    apex-test-engineer.md
-    salesforce-security-reviewer.md
-    salesforce-qa.md
-    salesforce-release-manager.md
-    salesforce-documentation.md
-  skills/
-    ticket-analysis.md
-    ticket-complexity-classification.md
-    metadata-discovery.md
-    solution-design.md
-    salesforce-implementation.md
-    apex-review.md
-    apex-static-analysis.md
-    apex-safe-refactoring.md
-    apex-test-hardening.md
-    apex-architecture-layering.md
-    apex-dml-separation.md
-    apex-refactoring-report.md
-    lwc-review.md
-    security-review.md
-    test-generation.md
-    metadata-manifest.md
-    uat-validation.md
-    deployment-docs.md
-    quality-gates.md
-
-docs/
-  salesforce-mcp-workflow.md
-  ticket-template.md
-  uat-template.md
-  deployment-checklist.md
-  quality-gates.md
-  apex-refactoring-workflow.md
-  apex-refactoring-checklist.md
-  apex-refactoring-report-template.md
-  definition-of-ready.md
-  definition-of-done.md
-  no-go-rules.md
-  environments.md
-  prompt-library.md
-  adoption-guide.md
-
-.github/
-  pull_request_template.md
-  ISSUE_TEMPLATE/
-    salesforce-ticket.md
-
-scripts/
-  install-workflow.sh
+LWC -> Controller -> Service/SM -> EM -> DM -> Database
 ```
 
-## Agents included
+## Baby-Step Install Tutorial 👶
 
-- `salesforce-orchestrator`: starts and routes each ticket lifecycle.
-- `salesforce-architect`: produces safe implementation plans.
-- `salesforce-developer`: implements approved scope in ACT MODE.
-- `apex-analyzer`: performs read-only Apex analysis before refactoring.
-- `apex-senior-refactor`: applies minimal-risk Apex cleanup after approval.
-- `apex-test-engineer`: creates and hardens Apex tests after refactoring.
-- `salesforce-security-reviewer`: validates security, sharing, and permissions.
-- `salesforce-qa`: validates acceptance criteria and test depth.
-- `salesforce-release-manager`: prepares release readiness and rollback.
-- `salesforce-documentation`: produces business and technical delivery notes.
+### Stage 1 - Choose your target project
 
-## Skills included
+Pick the Salesforce DX project where you want this workflow installed.
 
-- Intake and planning: `ticket-analysis`, `ticket-complexity-classification`, `solution-design`, `quality-gates`.
-- Discovery and scope control: `metadata-discovery`, `metadata-manifest`, `salesforce-implementation`.
-- Engineering quality: `apex-review`, `apex-static-analysis`, `apex-safe-refactoring`, `apex-test-hardening`, `apex-architecture-layering`, `apex-dml-separation`, `apex-refactoring-report`, `lwc-review`, `security-review`, `test-generation`.
-- Delivery readiness: `uat-validation`, `deployment-docs`.
+Example target:
 
-## Documentation included
+```bash
+/path/to/your-sfdx-project
+```
 
-- Workflow and operational guidance.
-- Dedicated Apex refactoring workflow, checklist, and report templates.
-- Ticket, UAT, and deployment templates.
-- Quality gates, Definition of Ready, Definition of Done, and no-go rules.
-- Environment strategy and adoption guide.
-- Prompt library for each delivery phase.
+### Stage 2 - Move into this template repository
 
-## Installation steps
+From this repository, run:
 
-1. Copy this repository (or selected workflow files) into your Salesforce DX project.
-2. Run `scripts/install-workflow.sh /path/to/your/sfdx-project`.
-3. Keep your existing `.codex/config.toml` if already present.
-4. Customize placeholders in docs/config before first ticket.
-5. Start with Orchestrator in PLAN MODE.
+```bash
+pwd
+```
 
-## Customization placeholders
+You should be inside the workflow template repo before using the installer.
 
-Customize these placeholders before active use:
+### Stage 3 - Run the installer
+
+Run:
+
+```bash
+./scripts/install-workflow.sh /path/to/your-sfdx-project
+```
+
+What this does:
+
+- copies `AGENTS.md`
+- copies `.codex/agents/`
+- copies `.codex/skills/`
+- copies `docs/`
+- copies GitHub templates when present
+- preserves an existing `.codex/config.toml`
+- backs up an existing `AGENTS.md`
+
+### Stage 4 - Open the target project
+
+After install, open your Salesforce DX project and confirm these paths exist:
+
+- `AGENTS.md`
+- `.codex/config.toml.example`
+- `.codex/agents/`
+- `.codex/skills/`
+- `docs/`
+
+### Stage 5 - Replace placeholders
+
+Update these placeholders in your target project:
 
 - `{{PROJECT_NAME}}`
 - `{{DEV_ORG_ALIAS}}`
@@ -133,62 +139,75 @@ Customize these placeholders before active use:
 - `{{DEFAULT_BRANCH}}`
 - `{{TEAM_NAME}}`
 
-## Recommended first workflow
+### Stage 6 - Start with the orchestrator
 
-Ticket
--> Orchestrator
--> Architect
--> Human approval
--> Developer
--> Security Reviewer
--> QA
--> Release Manager
--> Documentation
--> Manual deployment approval
-
-## Apex Refactoring Workflow
-
-Use the dedicated Apex workflow for cleanup and behavior-preserving refactors instead of the generic developer agent.
-
-- `apex-analyzer` is read-only and must produce the first report.
-- `apex-senior-refactor` preserves business logic, public contracts, and approved boundaries.
-- `apex-test-engineer` hardens tests after the refactor.
-- `salesforce-orchestrator` should route refactoring work automatically when the request indicates Apex cleanup.
-- This workflow is suited to DM classes, EM classes, service/SM classes, Apex controllers, trigger handlers, batch classes, and utility classes.
-- It supports layered architecture cleanup.
-- It can separate DML and complex SOQL out of controllers.
-- It supports DM, EM, SM/Service, Controller, and Wrapper patterns.
-- It requires an analyzer report and human approval first.
-
-## Safety model
-
-- Production deployment is forbidden by default.
-- Human approval is required before implementation (ACT MODE).
-- Human approval is required before any deployment activity.
-- Metadata names must be verified, never guessed.
-- Security uncertainty is a stop condition until reviewed.
-
-## Example first prompt
+Your first safe prompt should be:
 
 ```text
-Use salesforce-orchestrator in PLAN MODE for {{PROJECT_NAME}}.
-Analyze this ticket using {{DEV_ORG_ALIAS}}, classify complexity, list required agents,
-list approval gates, and return the first next action.
+Use salesforce-orchestrator.
+
+Task:
+[Describe what you want]
+
+Rules:
+- Treat this as a work intake request.
+- Classify the request type.
+- Choose the correct workflow.
+- Delegate to specialist agents internally.
+- Continue automatically through safe read-only/review phases.
+- Stop before code edits, metadata creation, deployment, destructive changes, or data mutation.
+- Do not deploy unless explicitly approved.
 ```
 
-## Roadmap for dev-only, UAT, and production-readonly usage
+## Fast Install Summary ⚡
 
-1. Dev-only baseline
-- Use `{{DEV_ORG_ALIAS}}`.
-- Manual validation and local checks.
-- No deployment automation.
+1. Clone or copy this repo.
+2. Run `./scripts/install-workflow.sh /path/to/your-sfdx-project`.
+3. Replace placeholders.
+4. Start with `salesforce-orchestrator`.
 
-2. Dev + UAT
-- Enable `{{HAS_UAT}}` and configure `{{UAT_ORG_ALIAS}}`.
-- Require Security Reviewer and Release Manager for medium+ changes.
-- Use formal quality gates before UAT handoff.
+## Included Structure 🗂️
 
-3. Dev + UAT + production-readonly
-- Enable `{{HAS_PROD}}` and configure `{{PROD_ORG_ALIAS}}` as readonly.
-- Production inspection only, no production deployment.
-- Keep explicit human approval and rollback readiness.
+```text
+.codex/
+  agents/
+  skills/
+  config.toml.example
+docs/
+scripts/
+.github/
+AGENTS.md
+```
+
+## Recommended First Workflow 🔄
+
+```text
+User Request
+-> salesforce-orchestrator
+-> Classification
+-> Safe analysis
+-> Approval gate
+-> Implementation or refactor
+-> Tests
+-> Security
+-> QA
+-> Release or docs
+```
+
+## Safety Model 🔐
+
+- Start in PLAN MODE.
+- Unsafe work requires explicit approval.
+- Do not deploy unless explicitly approved.
+- Never guess metadata names.
+- Stop when security impact is unclear.
+
+## Validation 🧪
+
+Use [docs/orchestrator-validation-checklist.md](/Users/aberrada/Desktop/Arkx Salesforce /D&A/Reusable-Salesforce-Agentic-workflow-template/docs/orchestrator-validation-checklist.md) after install.
+
+## Useful Docs 📚
+
+- [docs/prompt-library.md](/Users/aberrada/Desktop/Arkx Salesforce /D&A/Reusable-Salesforce-Agentic-workflow-template/docs/prompt-library.md)
+- [docs/salesforce-mcp-workflow.md](/Users/aberrada/Desktop/Arkx Salesforce /D&A/Reusable-Salesforce-Agentic-workflow-template/docs/salesforce-mcp-workflow.md)
+- [docs/apex-refactoring-workflow.md](/Users/aberrada/Desktop/Arkx Salesforce /D&A/Reusable-Salesforce-Agentic-workflow-template/docs/apex-refactoring-workflow.md)

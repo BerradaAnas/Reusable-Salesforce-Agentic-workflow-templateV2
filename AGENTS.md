@@ -50,6 +50,40 @@ Use placeholders until each project customizes them:
 - Allowed: deployment planning, checklist confirmation, rollback preparation.
 - Forbidden: deployment execution without explicit approval.
 
+## Universal Salesforce Work Intake
+
+Every user request must be treated as a potential work intake request.
+
+The primary entry point is `salesforce-orchestrator`.
+
+Users should not need to manually invoke every specialist agent. The orchestrator must classify the request and coordinate the right specialist workflow internally.
+
+Manual specialist invocation is allowed only for debugging or advanced control.
+
+Safe phases may continue automatically:
+
+- reading files
+- searching files
+- metadata discovery
+- analysis
+- planning
+- report creation
+- read-only security review
+- read-only QA review
+- documentation drafts
+
+Unsafe phases require explicit approval:
+
+- code edits
+- metadata creation
+- metadata deployment
+- data mutation
+- destructive changes
+- public contract changes
+- new architecture class creation
+- sharing/security behavior changes
+- transaction behavior changes
+
 ## Agent workflow
 
 1. Ticket intake (Orchestrator)
@@ -76,6 +110,22 @@ Use the dedicated Apex Refactoring Workflow for Apex cleanup, bulkification, con
 7. `salesforce-release-manager` if deployment planning is needed
 8. `salesforce-documentation`
 
+## Apex Architecture Rules
+
+For Apex architecture refactoring:
+
+- Controllers must be thin.
+- DML belongs in DM classes.
+- Complex SOQL belongs in EM/DM classes.
+- Business orchestration belongs in Service/SM classes.
+- Wrappers/DTOs preserve LWC JSON contracts.
+- Any movement across layers requires analyzer report and explicit approval.
+- Never refactor Apex directly through generic developer behavior.
+- Apex refactoring must start with apex-analyzer behavior.
+- Apex code edits require ACT MODE approval.
+- Tests are required after Apex refactoring.
+- Security review is required for controllers, `@AuraEnabled`, dynamic SOQL, sharing, permissions, or sensitive data.
+
 ## Human approval gates
 
 - Gate A: Plan approval before ACT MODE.
@@ -83,6 +133,20 @@ Use the dedicated Apex Refactoring Workflow for Apex cleanup, bulkification, con
 - Gate C: Security sign-off for required complexity levels.
 - Gate D: QA sign-off before release readiness.
 - Gate E: Explicit deployment approval before deployment activity.
+
+## Approval Phrases
+
+Only these phrases unlock unsafe work:
+
+- ACT MODE approved
+- Implementation approved
+- Refactor approved
+- Architecture refactor approved
+- DML separation approved
+- Test creation approved
+- Deployment approved
+
+If approval is unclear, stop and ask.
 
 ## Safety rules
 

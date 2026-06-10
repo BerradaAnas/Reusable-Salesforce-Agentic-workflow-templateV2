@@ -4,6 +4,8 @@
 
 Use dedicated Apex agents to analyze, refactor, test, review, and document Apex cleanup work without changing business behavior or bypassing approval gates.
 
+The user starts with `salesforce-orchestrator` only.
+
 ## Workflow steps
 
 1. Start with `salesforce-orchestrator`.
@@ -15,6 +17,10 @@ Use dedicated Apex agents to analyze, refactor, test, review, and document Apex 
 7. `salesforce-qa` validates preserved behavior and scope control.
 8. `salesforce-release-manager` prepares deployment artifacts if deployment is needed.
 9. `salesforce-documentation` records the final result.
+
+The orchestrator applies `apex-analyzer` behavior first, stops before edits, then resumes refactor, test, security, and QA behavior internally after approval.
+
+Manual agent invocation is for debugging or advanced control only.
 
 ## Mermaid flow
 
@@ -86,43 +92,42 @@ Do not modify code. Do not deploy.
 ### Approve refactor
 
 ```text
-Use apex-senior-refactor.
 ACT MODE approved.
+Continue the current orchestrated workflow.
 Use the analyzer report at [path].
-Refactor [ClassName] only within the approved scope.
-Do not change business logic, public/global signatures, @AuraEnabled wrapper properties, or field/object API names.
+Stay within the approved scope.
 Do not deploy.
 ```
 
 ### Run test hardening
 
 ```text
-Use apex-test-engineer.
-Create or improve tests for [ClassName] after refactoring.
-Cover nominal, null, empty, bulk, exception, and permission scenarios where applicable.
+ACT MODE approved.
+Continue the current orchestrated workflow.
+Apply test hardening for [ClassName].
 Do not deploy.
 ```
 
 ### Run security review
 
 ```text
-Use salesforce-security-reviewer.
-Review the Apex refactor for sharing, CRUD/FLS, dynamic SOQL, @AuraEnabled exposure, and data leakage.
+Use salesforce-orchestrator.
+Run the security review phase for the current Apex refactor.
 Do not modify files.
 ```
 
 ### Run QA
 
 ```text
-Use salesforce-qa.
-Validate the Apex refactor.
-Confirm public signatures unchanged, behavior preserved, tests pass, and scope did not expand.
+Use salesforce-orchestrator.
+Run the QA validation phase for the current Apex refactor.
+Do not modify files.
 ```
 
 ### Prepare release
 
 ```text
-Use salesforce-release-manager in RELEASE MODE.
-Prepare deployment order, rollback notes, and release risks for the approved Apex refactor only.
+Use salesforce-orchestrator.
+Prepare release readiness for the approved Apex refactor only.
 Do not deploy.
 ```

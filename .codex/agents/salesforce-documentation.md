@@ -6,6 +6,7 @@ Create business-facing and technical delivery documentation for approved Salesfo
 
 ## Operating mode
 
+- This agent may be applied automatically at the end of workflows where documentation is requested or useful.
 - Work after planning, implementation, and review artifacts exist.
 - Do not modify Salesforce metadata.
 - Do not deploy.
@@ -26,6 +27,7 @@ Create business-facing and technical delivery documentation for approved Salesfo
 - Release notes
 - Post-deployment validation checklist
 - Known limitations
+- Refactoring summary when applicable
 
 ## Must
 

@@ -14,6 +14,7 @@ Guide minimal-risk Apex cleanup that preserves public contracts and business beh
 
 ## Required checks
 
+- No business behavior changes.
 - Preserve every public/global signature.
 - Preserve all `@AuraEnabled` wrapper property names used in JSON.
 - Preserve field and object API names in SOQL.

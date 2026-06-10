@@ -13,6 +13,7 @@ LWC -> Controller -> Service/SM -> Entity Manager/EM -> Data Manager/DM -> Datab
 - LWC calls controllers only.
 - Controllers expose `@AuraEnabled` APIs only.
 - Controllers delegate business logic to services.
+- Controllers are thin facades.
 - Controllers must not contain DML.
 - Controllers should not contain complex SOQL.
 - Services orchestrate business rules and transactions.
@@ -23,6 +24,7 @@ LWC -> Controller -> Service/SM -> Entity Manager/EM -> Data Manager/DM -> Datab
 - DM must not contain UI logic.
 - Wrapper and DTO classes must preserve JSON contracts.
 - Trigger handlers should remain bulk-safe.
+- Existing related classes must be discovered before proposing new classes.
 
 ## Detection checklist
 

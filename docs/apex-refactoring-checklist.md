@@ -9,6 +9,7 @@
 
 ## During analysis
 
+- [ ] Orchestrator classification complete.
 - [ ] Full class reviewed.
 - [ ] Existing test class reviewed if present.
 - [ ] LWC consumers checked.
@@ -19,6 +20,8 @@
 ## Before refactor
 
 - [ ] Analyzer report exists.
+- [ ] Layering review complete.
+- [ ] DM, EM, and SM existing classes identified.
 - [ ] Human ACT MODE approval is explicit.
 - [ ] Allowed changes are listed.
 - [ ] Forbidden changes are acknowledged.
@@ -38,6 +41,8 @@
 - [ ] Files changed are listed.
 - [ ] Residual risks are documented.
 - [ ] Rollback notes are captured.
+- [ ] Security reviewed.
+- [ ] QA complete.
 
 ## Test validation
 
